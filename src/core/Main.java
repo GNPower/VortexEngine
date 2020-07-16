@@ -5,7 +5,7 @@ import core.kernel.Root;
 /**
  * <h1>Main Class</h1>
  * <p>
- * Main class of the graphics engine, responsible for initialisation calls to all engine systems
+ * Main class of the graphics engine, responsible for initialization calls to all engine systems
  * 
  * @author Graham
  * @version 2.0.0

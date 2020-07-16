@@ -1,0 +1,22 @@
+Memory Management
+
+	- most engines implement custom memory management solutions
+	- should look into this before continuing
+
+
+Math Library
+
+	-math liabraries can include:
+			-vector + matrix math
+			-quaternion rotations
+			-trig
+			-geometric operations with lines, rays, spheres, etc.
+			-numeric integration
+			-solving systems of linear equations
+	
+	-should look further into other engine implementations to expand my capabilities
+
+
+Custom Data Structures
+
+	-core systems include stuff like linked lists, binary trees, hash maps, searching, sorting, etc. all hand coded

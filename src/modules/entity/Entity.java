@@ -16,7 +16,7 @@ import resources.texturing.Texture2D;
 /**
  * <h1>Entity Class</h1>
  * <p>
- * Represents any non-specialised Game Object that can be rendered into the engine.
+ * Represents any non-specialized Game Object that can be rendered into the engine.
  * Stores an updatable model, 3D position and rotation, as well as a Render component,
  * to allow the entity the ability to render itself.
  * 

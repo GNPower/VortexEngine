@@ -1,0 +1,17 @@
+-provides a unified interface for accessing all types of assets
+
+
+IDEAS:
+
+	-should be called from higher systems alll through one class, maybe even one specific function
+	-idealy call one method give it 1. Resource Type, 2. Location, and it should invoke the correct resource loader and return the loaded data
+
+	-Things it should be capable of loading
+		
+
+			- 3D Model, choice between optimized and not
+			- Texture
+			- Materials (list of textures and maybe other stuff as required)
+			- Fonts
+			- Game World/Map (can come later once the rest is implemented)
+			

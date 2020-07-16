@@ -1,0 +1,17 @@
+Graphics SDK's:
+
+		- Glide (for voodoo graphics cards, old)
+		-** OpenGL **
+		- DirectX (primary opengl rival, not much docs compared to former)
+		- libgcm (for sony PS3)
+		- Edge (for sony PS3)
+
+
+Collisions And Physics:
+
+		- Havok (industrial strength physics engine)
+		- PhysX (industrial strength physics engine, FREE)
+		- Open Dynamics Engine (open source, FREE)
+
+
+e

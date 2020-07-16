@@ -1,0 +1,44 @@
+Most complex part and what the most time will be spent on
+
+Can be designed in many ways, though one common apporach is layered architecture:
+
+	-Low Level Renderer
+
+			- handles all the raw rendering facilities of the engine
+			- materials, textures, shaders and such go here
+			- PBR implementation will be on this level
+			- graphics device interface here (handles OpenGL calls)
+			- renderer should be dependant on a messaging loop (to handle messages from windows OS)
+			- messaging loop should be INDEPENDANT of rendering facilities
+
+	- Lighting and shading is described in referenced books [14], [44], and [1] in more explicit detail
+
+
+	-Scene Optimizations
+
+			- should be handled at a higher level then low level rendering, i.e. low level rendering draws whatever it is given
+				and assumes any wanted optimizations have been handled
+			- basic optimizations like a 'frustum cull' will do for simple applications
+			- complex applications should also employ things like a 'spacial subdivision' data sturcture
+			- portal or occlusion culling may also be applied here
+
+			- NOTE this layer should be entirely independant of low level rendering, so the correct optimizations can be made for the
+				correct games without the need to change the actual rendering code
+			- ORGRE (an open source engine) provides a very good example of this type of implementation
+
+
+	-Visual Effects
+
+			- things like ligth and shadow maps used here
+			- particle systems
+			- post effects, that are applied after the scene has been rendered to an off screen buffer
+		
+
+	-Front End
+
+			- 2D graphics overlayed ontop of the 3D scene. Use for stuff like in-game HUD's, inventories, captions, etc.
+			- Also used for dev. tools like the world builder. This stuff is not shipped with the final game though
+			- implemented either using 2D quads with orthographic projection, or billboarder quads rendered in 3D
+				-should look into advantages and drawbacks of both approaches. Maybe implement both??
+			- full motion video (FMV) also implemented here, played pre rendered video to the screen
+			- ingame cinecmatics implemented here, coreagraphed sequences that ocur in real time within the game
