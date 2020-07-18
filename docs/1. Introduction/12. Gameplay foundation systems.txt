@@ -1,0 +1,35 @@
+Gamepley refers the the actions taken within the game itself and the systems that directly support that action.
+Gameplay is implemented in either the language the engine is written in, or a high level scripting language that the engine supports (usaually both)
+To bridge the gap between gamepley and lwo level code, the Gameplay Foundation Systems layer is introduced
+
+	- Game Worlds and Object Models
+		
+			- contents of the world are usaully modeled in an abject oriented manner
+			- The collection of objects that make up the world is calle dthe 'game object model'
+			- typcial game objects include:
+					-static background geometryr (buildings, roads, terrain)
+					- dynamic ridid bodies (rocks, soda cans, chairs)
+					- player characters
+					- NPC's
+					- weapns, projectiles, vehicles
+					- lights
+					- cameras
+					- etc.
+
+	- Event System
+
+			- allows game objects to communicate with each other
+
+	- Scripting System
+
+			- makes development of gameplay features easier
+
+	- Artificial Intelligence Foundations
+
+			- Kynogon developed a middleware sdk fof integrating AI into game engines, this has been shutdown in 2017 though
+			- should find another free (possibly open source) middleware sdk for AI integration
+
+	- Game Specific subsystems
+		
+			- this layer sits on top of the gameplay foundations systems and is where game specific systems are implemented, like weapons etc.
+			- this layer is uasually the line between where the game engine stops and the game begins (i.e. shoudn't really be in the engine)

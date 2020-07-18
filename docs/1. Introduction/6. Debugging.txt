@@ -1,0 +1,16 @@
+Good general purpose debugging tools:
+
+	- Intel's 'VTune'
+	- IBM's 'Quantify' and 'Purify', part of the 'PurifyPlus' tool suite
+	- Computerware's 'Bounds Checker'
+	
+Most engines also build their own profiling and debugging tools to do the following:
+
+	- a mechanism to manually instument code (so specific code sections can be timed)
+	- facilities for displaying profiling stats on-screen while game is running
+	- facilities for dumping profiling stats to a text file (or other easily useable file format like excel)
+	- facilities for determining memory usage of engine and all its subsystems
+	- ability to dump (to a file or on screen) memry usage, high water mark, and leakage stats
+	- tools for scattering debug println statements in the code, and controlling level of verbosity of output
+	- ability to record and replay game events (very tough to do, but extrememly useful)
+

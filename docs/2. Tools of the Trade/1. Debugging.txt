@@ -1,0 +1,20 @@
+Profiler fall into two broad catagories:
+
+	- Statistical Profilers:
+
+			- this kind of profiler is designed to be un-intrusve, so the code runs at almost the same speed as production
+			- they work by sampling the CPU program counter periodically to see which function is running
+			- they give a general idea of which parts of the code are taking the longest to run
+			- Intel's 'VTune' is a good choice for statistical profilers
+			- http://software.intel.com/en-us/
+
+
+	- Instrumenting Profilers:
+
+			- this profiler is extermemly intrusive meaning the code will run to almost a halt
+			- it is designed to provide the most accurate detail about the programs execution as possible
+			- they work by inserting their own code into almost every line, to record excruciating details about the codes execution
+			- IBM's 'Rational Quantify' available as part of the 'Rational Purify Plus' suite is a good choice for this
+			- http://www.ibm.com/developerworks/rational/library/957.html
+
+	- A list of all good profilers is available at http://en.wikipedia.org/wiki/List_of_performance_analysis_tool

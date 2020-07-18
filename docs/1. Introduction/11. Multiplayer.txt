@@ -1,0 +1,24 @@
+Multiplayer comes in four basic catagories:
+
+	- Single Screen multiplayer
+			
+			- multiple HID's allow control of many players, who all share the same camera
+			- 'Fireboy and Watergirl' is a good example of this
+
+	- Split Screen Multiplayer
+
+			- multiple characters inhabit the same world, each having seperate cameras
+			- the screen is split into section to display all these cameras viewpoints at the same time
+			- 'COD 3' local multiplayer functionality is a good example
+
+	- Networked Multiplayer
+
+			- multiple computers or consoles are connected together
+			- all players are on different hardware but share the saem in game world
+
+	- MMO Games
+
+			- hundereds of thousands of players can be playing online at once, all within the same world
+
+Consideration for how multiplayer will owrk and be integrated into the game engine should be taken from day 1,
+as retrofitting a game engine with multiplayer capabilities can be a very difficult task to do properly

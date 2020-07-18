@@ -1,0 +1,8 @@
+Unreal engine provides a fairly robust audio engine, discussed in [40]
+
+If distributed on directX hardware (PC, Xbox) microsoft provides two audio API's:
+
+	- XAudio2
+	- X3DAudio
+
+All audio tools will stil require extensive integration and augmentation into the engine to create a high quality audio engine

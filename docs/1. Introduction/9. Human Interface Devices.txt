@@ -1,0 +1,9 @@
+Should be architected to divorce (separate) low level deatails like controller binary input from the high level details of what each button does
+
+Should allow incoming data to be manipulated to include things like 
+
+	- deadzones
+	- debouncing of button input
+	- deteting button down and up events seperately
+	- customizeable mapping between controller button and what it does
+	- should also provide ways to detect chords (multiple button pressed together) and sequences (buttons pressed in sequence within a time limit)

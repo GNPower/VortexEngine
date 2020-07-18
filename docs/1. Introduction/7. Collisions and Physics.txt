@@ -1,0 +1,14 @@
+The 'physics system' of a game engine is better described as a rigid body dynamics system. 
+It it mostly concerned with the motion of rigid bodies and the forces and moments caused by them.
+
+Havok is the industry standard for realistic physics, but its not free :(
+ 
+Next best option is NVIDIA's PhysX engine, thouh its not open source.
+Should look into tutorials on PhysX to see if its docs are good enough to easily use
+
+Popular open source physics engines are also available such as:
+
+	- Open Dynamics Engine (ODE)
+	- I-Collide
+	- V-Collide
+	- RAPID

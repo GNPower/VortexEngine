@@ -1,0 +1,9 @@
+Five main types of animation are used in games:
+
+	- sprite/texture animation (probly will never need)
+	- rigid body heigharchy animation (look into what this is)
+	- skeletal animation (book covers this)
+	- vertex animation (look into what this is)
+	- morph targets (look into what this is)
+
+Skeletal animation is the most prevelant animation system in games. 
