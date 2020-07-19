@@ -1,0 +1,46 @@
+Two types of errors, user and programmer errors.
+
+User Error:
+
+	-occurs when tthe user of the program does something incorrect, like enter an invalid input, opening a non existent file, etc.
+
+Programmer Error:
+
+	-a result of a bug in the code itself and not the fault of the user, but may be triggered by something the user has done
+	-the is an error that can be avoided if the programmer had not maken a mistake
+	-the user should expect that all situations like this are handled gracefully.
+
+In A Game Engine there are two types of users to worry about, errors should be handled differently depending on the user
+
+	-The end user playing the game
+	-The programmer making a game using the engine
+
+Errors should be handled differently depending on the user that triggered the error.
+
+Handling User Errors:
+
+	- should be handled as gracefully as possible, usually by displaying some helpful information
+	- if possible the user should be allowed to keep playing the game
+	- 
+
+
+Handling Programmer Errors:
+
+	- in contrast these errors should NOT be handled gracefully 
+	- program should be halted and low level debuggin info provided so programmer can find and solve the issue quickly
+	- it can be assumed the programmer has enough  knowledge to read error info and stack traces
+	- for some errors though, the game should be allowed to continue while the error is still made very obvious
+
+	-error codes, can be used to return a value outside of the expected function result. easy to understand but the calling function may not know what to do with the error
+	-could mean every function built in the engine must have a way to return an unexpected value, and a way to deal with all errors they are capable of handling
+
+	-exceptions avoid the error of passing errors up to a function that can deal with it
+	-drawback is a function may get wiped away mid run because some error it doesn't know about occured and a completely different function is handling the error
+
+	-assertions are a good way to deal with programmer errors, they check a statement and if it is false they will stop execution
+	-assertions can also be turned on and off as desired by th programmer so any errors they know about but want to ignore for now can be ignored
+	-assertions can also be stripped entirely from production code where programmer errors should not occur. This can give an extra bit of execution speed to the code as well
+
+Assertions are probly the best way to handle programmer errors, except for a select few cases where either error codes or exceptions are preffered.
+Assertions should also only be used to catch fatal errors
+any errors that allow the game to continue should be handled by notifying the user in an obvious way (such as bright orange and purple grahpics or an on screen message)
