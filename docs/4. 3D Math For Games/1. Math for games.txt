@@ -1,0 +1,48 @@
+in depth covrage of 3d math for games is covered in Eric Lengyel's book [28]
+
+Solving 3D Problems in 2D:
+
+	-a good approach  to solving 3d problems is to try and redefine them in 2D
+	-this will not always work but is a good place to start to solve a problem
+
+Points And Vectors:
+
+	-the cartesian coordinate system is the most common system in games
+	-There are however other systems used in games. a math library should include all three
+	 as well as a way to convert between them
+			-Cylindrical coordinates (h, r, theta)
+			-Spherical coordinate (r, phi, theta)
+			
+
+	-game programmers typically work with a left handed coordinate system, where x points right, y up, and z away from the viewer
+
+	-it is sometimes useful to define the unit vectors in the math library for later use in the code
+	-math library for vectors should have these basic functionalities
+		-scalar multiplication (both uniform and non-uniform scaling)
+		-addition and subraction
+		-magnitude
+		-squared magnitude (because square roots are very expensive to calculate on even modern hardware)
+		 **never take a square root when you don't have to**
+		-normalization (converting to a unit vector)
+		-dot product
+		-cross product
+		-linear interpolation ( LERP=(A,B,beta) lies beta percent of the way along the line from A to B )
+			=[ (1 - beta)*Ax + beta*Bx , (1 - beta)*Ay + beta*By , (1 - beta)*Az + beta*Bz ]
+
+
+
+Matrices:
+
+	-math library for matrices should have these basic functionalities
+		-matrix multiplication
+		-inversion (not all matrices have inverses, but all 'affine' matrices do)
+		-transpose
+	
+
+Matrix scaling can be done either uniformly or non-uniformly. Though to keep bounding checks of spheres fast, many engines restrict collision primitives to only uniform scaling
+Some game libraries also omit the 4th column in a 4x4 matrix, making a 4x3 affine matrix. This is because the 4th column is always [0 0 0 1]^T
+
+
+View Space:
+
+	-OpenGL defines its view space tro e right handed. The engine should do the same since it is using OpenGL's API
