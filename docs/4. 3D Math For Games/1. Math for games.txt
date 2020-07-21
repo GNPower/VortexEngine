@@ -46,3 +46,12 @@ Some game libraries also omit the 4th column in a 4x4 matrix, making a 4x3 affin
 View Space:
 
 	-OpenGL defines its view space tro e right handed. The engine should do the same since it is using OpenGL's API
+
+
+Quaternions:
+
+	-math library for quaternions should have these basic functionalities
+		-magnitude
+		-multiplication
+		-conjugate
+		-inverse
