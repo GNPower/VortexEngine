@@ -55,3 +55,8 @@ Quaternions:
 		-multiplication
 		-conjugate
 		-inverse
+		-matrix to quaternion (http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm)
+		-linear interpolation
+		-spherical linear interpolation
+		-
+	
