@@ -59,4 +59,24 @@ Quaternions:
 		-linear interpolation
 		-spherical linear interpolation
 		-
-	
+
+Lines Rays and Line Segments:
+
+	-not sure if should be included in math library
+	-should check mathematics for game programming book or variaous game engine math libraries to see if this must be included
+
+Spheres:
+
+	-usually expressed as a center point plus a radius
+	-this packs nicely into a Vector4f = [Cx  Cy  Cz  r]
+	-packing data into Vector4f (or anyhting with 32-bit floats, i.e. 128-bit packages) is useful for SIMD math
+
+Planes:
+
+	-not sure if should be included in math library
+	-should check mathematics for game programming book or variaous game engine math libraries to see if this must be included\
+
+	-can also be stored in a Vector4f [A  B  C  d] where d is the distance from the point to the plane
+	-interestingly using a matrix to switch between spaces will also work on this representation of a plane
+
+
