@@ -79,4 +79,12 @@ Planes:
 	-can also be stored in a Vector4f [A  B  C  d] where d is the distance from the point to the plane
 	-interestingly using a matrix to switch between spaces will also work on this representation of a plane
 
+Random Numbers:
+
+	- .rand() implementations are not garenteed to be reliably random, so its generally best to implement your own
+	-'Mersenne Twister' is an efficient and reliable way to generate psudo-random numbers
+	- can be found here http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/
+
+	-'Mother of All' random number generator also a good choice as it runs faster than 'Mersenne Twister'
+
 

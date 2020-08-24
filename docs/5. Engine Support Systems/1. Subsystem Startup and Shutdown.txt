@@ -1,0 +1,31 @@
+-When an engine starts up, each subsystem must be configured and initialized in a specific order.
+-Interdependancies between subsystem define this order
+
+-Starting/Stopping the system
+
+	-an option is to have an overarching singleton object that manages start and stop of the engine as a whole
+	-this singleton would start all the subsystems in the required order when the engine first starts
+	-each subsystem should also have a manager to start and stop itself
+		-constructors of this manager should do absolutely nothing since construction order cant be exactly controlled
+		-instead a startUp() and ShutDown() method should be provided in each manager for explicit control
+
+	-there is another way!
+		-each manager can declare its other subsystems dependancies in a settings file
+		-on startup the overarching singleton manager can read these dependancies and determine the best startup order
+			-this is usually done by registering each manager to a global priority queue and walkig through it on startup
+		-shutdown is then done in the reverse order.
+		-this can lead to issues if the dependancies aren't properly defined
+		-to help debug this, startup order should always be logged
+
+	-either way has its advantages and disadvantages
+	-easiest to maintain is to go brute force and have manager explicitely start subsystems in the required order
+	-most elegant is to have manager register them to a priority queue based on dependacies
+
+
+-Examples from OGRE Engine:
+
+	-everythig in OGRE is managed by a singleton called Ogre::Root, which has pointers to all subsystems
+	-it manages the startup and shutdown of everything
+	-starting this engine simply requires calling a new instance of the Root
+
+	-OGRE also provides an Ogre::Singleton base class form which all its manager classes derive

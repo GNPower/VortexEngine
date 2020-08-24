@@ -1,0 +1,6 @@
+General rules for memory allocation in game programming:
+	- keep heap allocation to a minimum
+	- never allocate from the heap within a tight loop
+
+Writing or using custom allocators is a good way to increase engine performance
+
