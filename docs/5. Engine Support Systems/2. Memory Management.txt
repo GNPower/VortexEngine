@@ -4,3 +4,52 @@ General rules for memory allocation in game programming:
 
 Writing or using custom allocators is a good way to increase engine performance
 
+Stack Based Allocators:
+
+	-some games allocate all the memory that will be used by a level on load
+	-then little to no allocation takes place once the level is loaded
+	-when the level is finished, all the memory is freed
+
+	Implementing:
+	
+		-allocate a large block of memory using malloc() or global new or an array of bytes
+		-pointer to first byte in stack maintained
+		-memory allocation moves pointer along the contigeous block
+		-NOTE: using this method memory must be freed in reverse order it was written
+
+
+Pool Allocators:
+
+	-its common to want to allocate alot of same sized chunks of memory, i.e. matricies or meshes
+	-pool allocators are prefered for this type of memory allocation
+	
+	Implementing:
+
+		-A large block of memory is allocated whose size is a multiple of the blocks to be stored within it\
+		-each element in the pool is added to a linked list of free elements
+		-when an allocation request is made we pop the first element in the list and return it
+		-when an element is freed we tack it on the the end of the list
+		-the benefit of this allocation is it is always O(1) no matter how many elements are free
+
+
+Single Frame and Double Buffered Allocators:
+
+	-lots of memory in an engine is only needed for a single frame and then discarded, or created one frame then used the next
+	-this creates a need for memory allocators who only hold their contents for that short amount of time
+
+	Single Frame Allocator Implementing:
+
+		-managed by reserving a single block of memory and managing it with a stack allocator
+		-the stack is cleared at the beginning of each frame
+		-this way there is no need to worry about freeing allocated memory, since it is cleared each frame
+
+	Double Buffered Allocator Implementing:
+
+		-allows memory to be stored on frame (i) to be use on frame (i + 1)
+		-acheived by creating two single frame allocators and switching between which one is stored and wiped each frame
+
+Fragmenting Memory:
+
+	-most pc's will implement virtual memory systems to avoid memory fragmentation
+	-consoles however do not support it
+	-the use of stack and/or pool allocators can avoid memory fragmentation and avoid allocation failures

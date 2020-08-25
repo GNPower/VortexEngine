@@ -1,0 +1,9 @@
+An iterator is a class that 'knows' how to efficiently visit each element in a particular kind of container.
+It acts like an array index or pointer, refering to one element at a time and allowing for it to be advanced to the next.
+It should provide some sort of mechanism for determining whether or not all elements have been visited.
+
+Benefits of using an iterator over direct access are as follows:
+
+	-direct access would break class encapsulation
+	-an iterator can iterate over the elements of the container effieciently without exposing the implenetation
+	-iterators simplify the process of iterating

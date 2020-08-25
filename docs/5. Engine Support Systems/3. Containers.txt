@@ -1,0 +1,105 @@
+A wide variety of collection-oriented data structures are required for game engines.
+
+The following are the most commonly needed ones, some are provided by the programming language:
+
+-Array
+	
+	-ordered collection of elements accessable by index
+	-may be single or multi-dimensional
+
+-Dynamic Array
+	
+	-an array whose length can change at runtime
+	-an example is STL's std::vector
+
+-Linked List
+
+	-ordered collection of elements linked to one another via pointers
+	-not necessarily contigeous in memory
+
+-Stack
+
+	-a last-in-first-out (LIFO) model for adding and removing elements
+
+-Queue
+
+	-a first-in-first-out (FIFO) model for adding and removing elements
+
+-Deque
+	-A double ended queue
+	-supports efficient insertion and removal from both ends of the queue
+
+-Tree
+
+	-A container whose elements are groups hierarchically.
+	-each element (node) has zero or one parent and zero or more children
+
+-Binary Search Tree (BST)
+
+	-A tree in which each node has at most two children
+	-Also has an node order criteria to keep the tree sorted in some well defined criteria
+	-Examples include red-black trees, splay trees, AVL trees, etc.
+
+-Binary Heap
+
+	-A binary tree which maintains some specific order properties
+	-the shape property, states every row is filled and the last row is filled from left to right
+	-the heap property, states every node, by some user defined criterion, is 'greater than' or 'equal to' all of its children
+
+-Priority Queue
+
+	-Allows nodes to be added in any order and then removed in order of priority
+	-typically implemented ah a heap, but not required to be
+	-sort of like a list that stays ordered by priority at all times, but rarely implemented that way
+
+-Dictionary
+
+	-A table of key-value pairs
+	-value can be looked up efficiently by its corresponding key
+	-Examples include std::map and std::hash_map
+
+-Set
+
+	-A container that garentees all elements are, by some criteria, unique
+	-like a dictionary with only keys and no values
+
+-Graph
+
+	-A collection of nodes connected to one another by unidirectional or bidirectional pathways in an arbitrary pattern
+
+-Directed Acyclic Graph (DAG)
+
+	-A collection of nodes with unidirectional interconnects, with no cylces.
+	-i.e. there is no path you can take that starts and ends on the same node
+
+
+
+When making use of these containers, some commonplace algorithms will need to be used as well to manipulate the containers
+
+-Insert
+
+	-add a new element to the container
+	-may be placed at the begginning, end, or middle, depending on the ordering of the container
+
+-Remove
+
+	-remove an element from the container
+	-this may require a find operation first
+
+-Secuential Access (Iteration)
+
+	-accessing each element in the container in some predefined order
+
+-Random Access
+
+	-accessing elements in the container in an arbitrary order
+
+-Find
+
+	-search the container for an element (or elements) that meet the given criterion
+	-different searching algorithms will be required depending on the type of container in use
+
+-Sort
+
+	-sort the contents of a container according to some given criteria
+	-different sorting algorithms will be required depending on the type of container in use
