@@ -1,0 +1,39 @@
+Game engines need to be able to load a wide variety of different media types.
+This results in the need to call the native library to load files.
+To shield the engine from the native OS, engines tend to wrap the native API in an engine specific one.
+This will allow the engine to be more portable with minimal changes to the engine file system.
+
+A game engines file system API addressses the following funcionalities:
+
+-Manipulating File Names and Path
+
+	-A path is a string describing the location of a file or sirectory withing the file system hierarchy
+	-Each OS will use a slightly different path format (ex. backslash on windows vs. front slash on linux)
+	-Search path: A list of paths, separated by a special character like a semi-colon, in which to look for a file
+	-Searching for assets at runtime, while possible, is a time consuming process. If possible, all resource location should be explicitly given
+
+
+-Opening, Closing, Reading, and Writing Individual Files
+
+	-Most languages come with file I/O libraries that provide both buffered and unbuffered options
+	-Buffered options provide a layer of abstraction from the native OS, making files look like a stream of bytes instead of files
+	-Unbuffered options give more details about the file itself including security options, but require more work to handle the files read data
+	-Unbuffered API calls are sometimes just directly exposed OS system calls
+	
+	-Reading and Writing from files can sometimes be time consuming and stall the game loop
+	-When possible files should be read or written in bulk to avoid constantly opening and closing the files, a time consuming process
+	-If the game loop is not directly dependant on the result of the read/write it may be a good idea to preform the operation in a different thread, so as not to stall the game loop
+
+	-Many engines also wrap the File I/O API into an API of their own, this provides some advantages
+		-identical behaviour across all platforms can be garunteed
+		-the API can be simplified to only the required functionality for the engine
+		-Extra functionality can be provided, such as dealing with files on a dvd, usb, or network
+
+-Scanning the Contents of a Directory
+
+
+-Handling Asynchronous File I/O Requests (For Streaming)
+
+	-Streaming is the act of loading data in the background, while the main program continues to run
+	-engines can use this to load data from files without making the player wait through a loading screen
+	-To use file streaming, an asynchronous file I/O library must be utilized

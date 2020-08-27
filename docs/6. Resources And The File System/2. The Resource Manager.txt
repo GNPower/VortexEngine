@@ -1,0 +1,20 @@
+The resource manager is comprised of two distinct but integrated components.
+One component manages the offline tools used to create the assets and transform them into their engine-ready form.
+The other component manages the resources at runtime, ensuring they are loaded before they are needed in the game, and unloaded after they're used
+
+The Resource Database:
+
+-This database should be capable of processing resources from their outside formats to their engine ready forms.
+-It should also provide these basic functionalities:
+
+	-The ability to create new resources
+	-The ability to delete resources
+	-The ability to inspect and modify existing resources
+	-The ability to move one resources files from one location to another
+	-The ability of a resource to cross reference other resources
+		-This helps drive the resource building process and the loading process by ensuring no duplicate data is used
+	-The ability to maintain referential integrity of all its cross references within the database
+		-This ability must hold during common operations like deleting or moving resources
+	-The ability to maintain a revision history, complete with a log of who made each change and why
+	-The ability to search or query the database for desired resources
+	
