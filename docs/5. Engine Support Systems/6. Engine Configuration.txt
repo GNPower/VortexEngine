@@ -1,0 +1,61 @@
+Game engines have a large number of configurable options, some which will be exposed to the end user, but some will be kept available only to the developer.
+These developer only options may be stripped from the game and changed to hard coded value when shipped.
+
+Examples Of Player Exposed Options:
+
+	-graphics quality settings
+	-volume of music and sounds
+	-in game options menus
+
+
+Examples Of Developer Only Options:
+
+	-playeer characters maximum walking speed
+
+
+Loading and Saving Options:
+
+	Configuable options can be implemented easily using a global variable, or as a member of a singleton class.
+	Saving these options to the disk can be done in many different ways
+
+	-Text Configuration Files
+
+		-the most common way to store options
+		-allows them to be stored in a formatted, human readable file
+		-common format choices are Windows INI, or XML
+
+	-Compressed Binary Files
+
+		-best used when storage space is limited
+		-allows for options to be stored in a way not easily readable by humans
+		-can be used to store options the developer doesn't necessarily want people being able to read or change directly from the file
+
+	-Windows Registry
+	-Command Line Options
+	-Environment Variables
+
+	-Online User Profiles
+
+		-can be used to save options as well as other useful data in a place acessible anywhere the user has internet connection
+		-data can be stored in a central server, allows for easier tracking of desired metrics
+
+
+Per-User Options:
+
+	- Many engines differ between global and per-user options
+	- Allows the end user to tweak the gaem the their liking, as well as developers or artist during development
+	- This tweaking can be done without stepping on each others toes
+	- Care must be taken to store per-user options in a way that each user can only see their own
+	- In Windows the hidden AppData folder is used to store user specific data in per application folders.
+
+
+Loading Configuration:
+
+	-On engine startup, configuration can be loaded from many different places.
+	-Basic options for how the engine should start up can be loaded from the comand line
+	-These basic options cannot be loaded from the command line for the final game however, so choose these arguments carefully
+	-Scheme Data Files (or other human readable formats) for all options while in development
+	-If wanted some of the human readable files can be transformed into propietary binary formats when shipped
+
+	-These configuration files can be transformed into engine classes or data structures as well, if you want to use more than just variables as options
+	

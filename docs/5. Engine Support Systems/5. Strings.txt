@@ -1,0 +1,57 @@
+The usage of strings in game engines present some issues of how to deal with their presence and use.
+A fundamental issue is how you wish to store strings in you program. In C and C++ Strings arent an atomic type.
+
+Another big issue is localization, some languages are read top to bottom or right to left instead, and translations
+may not be the same character length
+
+Also, some strings are used internally within the game engine. For example, when a game designer lays out a level
+it is convenient to allow them to identify objects by meaningful string names
+
+It is generally good to avoid using a String class unless you are aware of the cost of doing so, and careful not to abuse it
+One exception to this is when dealing with the file system. It is a good idea to have a Path class. This class could provude
+functions for extracting the filename, file extension, or directory. It could hide operating system differences by converting
+windows OS backslashes into UNIX-Style forward slashes. Writing a class like this could be highly valuable for a game engine.
+
+A solution to allow objects to be named but still have quick comparisons is to hash our strings.
+A good hash function choice is a variant of the CRC-32 algorithm
+
+A method for implementing the hash:
+
+	-Hashing, though more efficient than string comparison, is still slow. So its still best to only use it when nessesary
+	-Allow designers to name objects using strings, but hash those strings to generate a Global Unique Identifier (GUID)
+	-This GUID can be created at compilation time, or load time, to avoid having to run a hash at runtime, and slow the frame rate
+	-Within the engine the object can be refered to using only its hash for quicker comparisons
+	-The hash value can be mapper to the original string name in a global table of hashes
+	-The original string name can be recovered from the hash by looking it up in the global table
+
+Another method used by Unreal:
+	
+	-wrap both a pointer to the string name and the hash in a tiny class called FName
+	-all objects have an FName so both their hash and string name can be directly accessed
+
+
+Another problem in game engines comes by localization. The developer might use one language, but the end user another.
+This means that there must be some way of displaying the correct text the the user based on the language of their choice.
+
+A Simple Approach:
+
+	-implement a table of all strings to be used in the game (internal strings can be excluded, we only care about strings displayed to the end user)
+	-this table can be sorted by having an ID column, which contains a string_id readable by the developer
+	-for each new language the engine supports, an additional column can be tacked on to this table, containing the translated version of all the strings
+	-never display a raw string to the user, always make a call to this table using the string_id to get the correct language for your user
+	
+Selecting the correct language can be done in one of two ways:
+
+	-At compilation time:
+
+		-this would mean the language lookup table does not need to be shipped with the game
+		-this would potentialls save time by avoiding lookup calls to the table
+		-downside is language is locked after compillation and not changeable by the user
+		-this means the developer would have to release a version of the game for every language they wish to support
+
+	-At Runtime:
+
+		-this would mean the language lookup table needs to be shipped with the game
+		-could slow down the game slightly since a call to the lookup table is required for every string to be displayed
+		-would allow for languange to be selected by the user via an ingame menu
+		-only one version of the game would have to be released that could handle every language supported
