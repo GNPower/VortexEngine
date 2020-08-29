@@ -21,3 +21,43 @@ Resource File and Directory Organization
 	-It is a good idea to permit both loose and archived resource options allowing the developer to choose which one to use themselves
 	-The 'zlib' library is a free open source library for reading and writing to zip archives
 
+
+Resource GUID's
+
+	-Every resource in a game must have a globally unique identifier (GUID)
+	-most common choice is a string or 32-bit hash (has is faster)
+	-This is an intuitive method because the OS guarantees no two files have the same path
+	
+
+Resource Registry
+
+	-this ensures that only one type of resource is loaded in memory at any given time
+	-simplest implementation is a dictionary mapping GUID (key) to the resource itself (value), usually in the form of a pointer
+	-to get a resource, the developer calls a get method within the resource manager passing the GUID of the resource
+	-If the resource cannot be found it is either loaded automatically or an error code is returned
+		-One possibility is the game loads the resource asynchronously and returns a process ID (PID) so the developer can get their resource when they actually need it
+
+	
+Resource Lifetime Requirements
+
+	-Some resources must be loaded when the game first starts and will stay loaded the entire game
+	-these resources have effectively infinite lifetimes and are sometimes called 'global resources' or 'global assets'
+	-examples include all the player characters resources (i.e. mesh, texture, animation), the HUD, and very common items
+	
+	-Other resoures have a lifetime that matches a particular game level
+	-these resurces must be loaded by he time the level is seen by the player, and unloaded after the player has permanently left the level
+	
+	-Some resources have a lifetime of less than a level
+	-examples include resources that make up an in-game cinematic, these might be loaded in time for the cinematic and dumped right after
+	
+	-Some resources, like sound effects and music, are streamed 'live' as they play
+	-The lifetime of these resources if difficult to determine since each byte on persists in memory for a fraction of a second, but the entire piece of music lasts a long time
+	-These assets are typically loaded in chunks whose size matches the hardwares requirements (i.e. the size of an audio buffer)
+	-Only two chunks will ever be present in memory at a time, the chunk being actively used and the chunk immediately after which is being loaded into memory
+
+
+These lifetimes can be managed by reference-counting the resources.
+Group resources (or there GUID's) into resource batches, where a batch is the list of all the resources needed for a specific level or game state.
+Batches can then be added or removed from the resource manager manually by the developer, or added and given explicit lifetimes (in ms) after which they will be automatically removed.
+Batches can also be switched between, where the second batch is added before the first is removed, to ensure only the resources that wont continue to be removed will be deleted.
+The resource manager would manage multiple batches with potentially the same resources by maintaining a global list of reference-counted resources, so removing a batch would only remove its resources if they arent in use by another batch.
