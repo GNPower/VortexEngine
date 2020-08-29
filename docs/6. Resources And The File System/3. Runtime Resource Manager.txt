@@ -1,0 +1,23 @@
+Responsibilities of the Runtime Resource Manager:
+	
+	-Ensures only one copy of each unique resource exists in memory
+	-Manages the lifetime of each resource
+	-Loads needed resources, and unloads them when no longer needed
+	-Handles the loading of a composite resource
+		-A resource that is comprised of other resources, like a model which contains a mesh, material, skeleton, etc.
+	-Maintains referential integrity
+		-This includes internal referential integrity and external referential integrity (i.e. references between different resources like a model and an animation)
+	-Manages the memory usage of loaded resources, and ensures they are in the correct place in memory
+	-Permits custom processing to be performed on a resource ('loggin in' or 'load-initializing' the resource)
+	-Provides a unified interface through which all resources can be managed
+	-Handles streaming (i.e. asynchronous resource loading)
+	
+
+Resource File and Directory Organization
+
+	-Some game engines (typically PC), individual recources are managed in a seperate 'loose' file on-disk
+	-Files are typically contained in a directory tree for developer convenience, the engine generally does not care where it will be, other than within the main resources folder.
+	-Other engines package their resources together in a single file (like a .ZIP archive), this reduces resource load times
+	-It is a good idea to permit both loose and archived resource options allowing the developer to choose which one to use themselves
+	-The 'zlib' library is a free open source library for reading and writing to zip archives
+
