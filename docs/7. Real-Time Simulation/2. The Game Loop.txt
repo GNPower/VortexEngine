@@ -1,0 +1,9 @@
+A game is comprised of many interacting subsystems, including device I/, rendering, animation, physics, multiplayer networking, audio, etc.
+Most subsystems require periodic servicing, however the servicing rate varies form subsystem to subsystem.
+Animation typically must be updated in sync with the rendering system (i.e. 30 or 60 Hz), whereas physics usually needs more frequent updates (maybe 120 Hz).
+Higher level subsystems like AI sometimes only need to be services once every second, and don't neccessarily need to be synchronised with the rendering loop.
+
+
+Most engines also support an event system, this allows for different subsystems to express their interest in knowing when different events are triggered so they can respond accordingly.
+This system could also be used for updating subsystems by creating update events and allowing the subsystems to respond to these events by updating themselves.
+Though the engine must suport event posting (i.e. scheduling an event to happen at a future time) for this to be an option.

@@ -1,0 +1,28 @@
+It is extremely useful to think in terms of abstract timelines when programming games.
+An abstract timeline is a continuous, one-dimensional axis whose origin (t=0) can lie at any arbirary location relative to the other timelines in the system.
+This can be implemented via a simple clock variable that stores absolute time value in integer or floating point format.
+
+Real Time:
+
+	-value measured by the CPU's high resolutino timer lie on the 'real timeline'
+	-the origin of this timeline coincides with when the CPU was last powered on or reset
+	-this timeline is measured in terms of CPU cycles (or some multiple thereof)
+	-can easily be converted into seconds by multiplying by the resolution of the CPU's timer
+
+Game Time:
+
+	-we don't have to restrict ourselves to using only real time, and can define whatever other timelines we see fit to solve the problem at hand
+	-normally game time coincides with real time, though if the game is paused we can choose to stop updating this time temporarily
+	-the speed of this timeline can be adjusted at will (i.e. to make the game feel like it is in slow or fast motion)
+	-pausing/stopping the game time can also be very useful for debugging, if you wish to track a visual anomoly or something similar
+	-multiple of these 'game times' can be used and different objects in the world can be attached to different timelines
+		-for example the camera can be attached to a seperate timeline so it can be moved around in real time while the game is paused
+	-you can choose to support 'single stepping' where the game time is advanced by a single frame (1/30th of a second)
+
+Local and Global Timelines:
+
+	-many other timelines, existing for for convinience, can be defined whose starting point and speed can be adjusted at will
+	-an animation or audio clip may define a local timeline whose origin coincides with the start of the clip
+	-defining seperate timelines for this allows us to speed-up, slow-down, or pause the clip independant of the rest of the game
+	-these type of timelines are usually defined by mapping a start point and playback scale to an absolute timeline as a reference
+		-i.e. a local timeline could start at t=124s on the real timeline with a playback scale of 0.5 times the real timeline. This would effectively play the clip at half speed starting at 124s
