@@ -1,0 +1,58 @@
+Platform Detection:
+
+	-specific platform detection handled by the JVM, can be accessed by calling 
+	-Should provide a static class 'Platform' that provides engine with details about the platform it is running on
+		-
+
+
+Atomic Data Types:
+
+	-handled by Java
+
+
+Collections and Iterators:
+
+	-iterators should be a method implentation in the Collection specific implementation
+	-The following collections are not sufficiently present in Java and should be implemented:
+		-Linked List
+		-Stack
+		-Queue
+		-Deque
+		-Tree
+		-Binary Search Tree (BST)
+		-Quadtree
+		-Binary Heap
+		-Priority Queue
+		-Graph
+		-Directed Acyclic Graph
+
+
+File System:
+
+	-Implement a 'Path' class who can store a path using engine specific syntax (probly close to linux), and can return OS specific variations of that path	
+	-Implement a 'ResourceLoader' class capable of synchronous resource loading of all resource types. This class must be passed an engine specific 'Path'
+
+
+Network Transport Layer:
+
+	-TBD
+
+
+Hi-Res Timer:
+
+	-TBD
+
+
+Threading Library:
+
+	-TBD
+
+
+Graphics Wrappers:
+
+	-TBD
+
+
+Physics/Collision Wrappers:
+
+	-Not to be implemented yet

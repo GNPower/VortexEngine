@@ -4,11 +4,11 @@ To bridge the gap between gamepley and lwo level code, the Gameplay Foundation S
 
 	- Game Worlds and Object Models
 		
-			- contents of the world are usaully modeled in an abject oriented manner
-			- The collection of objects that make up the world is calle dthe 'game object model'
+			- contents of the world are usaully modeled in an object oriented manner
+			- The collection of objects that make up the world is called the 'game object model'
 			- typcial game objects include:
-					-static background geometryr (buildings, roads, terrain)
-					- dynamic ridid bodies (rocks, soda cans, chairs)
+					-static background geometry (buildings, roads, terrain)
+					- dynamic rigid bodies (rocks, soda cans, chairs)
 					- player characters
 					- NPC's
 					- weapns, projectiles, vehicles

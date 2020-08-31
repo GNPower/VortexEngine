@@ -1,0 +1,42 @@
+Graphics Device Interface:
+
+	-TBD
+
+
+Primitive Submission:
+
+	-TBD
+
+
+Viewports & Virtual Screens:
+
+	-TBD
+
+
+Texture & Surface Management:
+
+	-TBD
+
+
+Debug Drawing (Lines etc.):
+
+	-TBD
+
+Materials & Shaders:
+
+	-TBD
+
+
+Static & Dynamic Lighting:
+
+	-TBD
+
+
+Cameras:
+	
+	-TBD
+
+
+Texts & Fonts:
+
+	-TBD

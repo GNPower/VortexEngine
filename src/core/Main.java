@@ -15,9 +15,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Root game = new Root();
-		game.init();
-		game.launch();
+		System.getProperties().list(System.out);
+		
+//		Root game = new Root();
+//		game.init();
+//		game.launch();
 		
 	}
 }

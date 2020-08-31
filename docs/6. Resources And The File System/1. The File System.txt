@@ -7,7 +7,7 @@ A game engines file system API addressses the following funcionalities:
 
 -Manipulating File Names and Path
 
-	-A path is a string describing the location of a file or sirectory withing the file system hierarchy
+	-A path is a string describing the location of a file or directory withing the file system hierarchy
 	-Each OS will use a slightly different path format (ex. backslash on windows vs. front slash on linux)
 	-Search path: A list of paths, separated by a special character like a semi-colon, in which to look for a file
 	-Searching for assets at runtime, while possible, is a time consuming process. If possible, all resource location should be explicitly given

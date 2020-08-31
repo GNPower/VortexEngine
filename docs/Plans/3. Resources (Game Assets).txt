@@ -1,0 +1,43 @@
+Resource Manager:
+
+	-TBD
+
+
+Texture Resource:
+
+	-TBD
+
+
+Material Resource:
+
+	-TBD
+
+
+3D Model Resource:
+
+	-TBD
+
+
+Font Resource:
+
+	-TBD
+
+
+Skeletal Resource:
+
+	-TBD
+
+
+Collision Resource:
+
+	-TBD
+
+
+Physics Parameters:
+
+	-TBD
+
+
+Game/World Map:
+
+	-TBD

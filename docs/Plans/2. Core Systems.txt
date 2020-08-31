@@ -1,0 +1,91 @@
+Random Number Generator:
+
+	-TBD
+
+
+Math Library:
+
+	-TBD
+
+
+Memory Allocation:
+
+	-TBD
+
+
+Assertions:
+
+	-TBD
+
+
+Unit Testing:
+
+	-TBD
+
+
+Debug Printing and Logging:
+
+	-TBD
+
+
+Strings and Hashed String ID's:
+
+	-TBD
+
+
+Parsers (CSV, XML, etc.):
+
+	-TBD
+
+
+Engine Config:
+
+	-TBD
+
+
+Object Handles/Unique ID's:
+
+	-TBD
+
+
+Asynchronous File I/O:
+	
+	-Implement a asynchronous file I/O library for file streaming
+		-Should allow retreival of the file through either a callback function or soft/hard deadline specification
+		-Callback function method: provided a function to call, will call it once the resource is loaded, nothing returned from this loading function
+		-Deadline Method: provide a soft deadline (in ms) that the file should be loaded by.
+				  a file load process will be created and given a process ID (PID), this PID is returned to the caller.
+				  The PID can be passed to the load manager to get the current state of the process ('pending', 'loading', or 'complete').
+				  once compelte the PID can be passed to the load manager to get the loaded resource.
+				  if the game cannot continue without the resource the load manager's 'requireNow()' method can be called with the PID.
+				  this will stall then engine until the load is complete and then return the loaded resource.
+
+
+Module Start-Up and Shut-Down:
+
+	-TBD
+
+
+Localization Services:
+
+	-TBD
+
+
+Profiling/Stats Gathering:
+
+	-TBD
+
+
+Movie Player:
+
+	-TBD
+
+
+Curves & Surfaces Library:
+
+	-TBD
+
+
+RTTI/Reflection & Serialization:
+
+	-TBD
