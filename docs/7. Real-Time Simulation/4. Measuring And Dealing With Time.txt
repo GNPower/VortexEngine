@@ -1,0 +1,149 @@
+Frame Rate:
+
+	-describes how rapidly the sequence of still 3D frame is presented to the viewer
+	-the unit used to measure the cycles per second of a frame update i f'frames per second' (FPS), which is synonomous to Hertz (Hz)
+
+Time Delta:
+
+	-the amount of time between frames, measured in milliseconds (ms)
+	-can also be found as the inverse of the frame rate
+
+From Rate To Speed:
+
+	-a simple solution to convert from rate to speed is to use (delta time) as multiply it by the wanted speed, so that in game speed is dependant on real time
+		-this method only works for constant speed, a more complex numerical integration method is needed for variable speeds
+	-problem with delta time is its the time from the last frame, and past results doesn't garantee future performance
+	-one approach is to use a running average of frames, this will reduce the impact of framerate spikes, but also make the game less responsive to varying frame rates
+
+Governing Frame Rate:
+
+	-to entirely avoid the problem of guessing the next frames delta time, we can instead attempt to guarantee its value
+	-this is done by setting a target value (for delta time) and if the actual time is less, we simpley wait until it has elapsed
+	-this works well if the game is capable of consistently acheiving above the limit, but if it is consistently below the frame rate will diminish to something almost always below
+	
+-Generally it is a good idea to allow both delta time estimation and governance as timing systems in the engine, allowing the developer to choose which one they prefer
+-However in the final game, it is often better to use frame rate governance, since it can avoid problems like tearing, and physic simulaion inconsistencies
+
+Mesuring Real Time With A High Resolution Timer:
+
+	-most programming languages offer a Time API, however this is not accurate enough to measure delta time, which occurs in milliseconds
+	-To get an accurate account of the time passed, you must query the CPU's hig resolution timer
+	-The API for doing this is different from OS to OS
+	-On modern CPU's each core has a different high resolution which can, and do, drift apart. This can cause problems like negative time deltas
+	-High res timer API should be wrapped by the game engine to ensure platform independance
+
+Storing Time:
+
+	-time since the engine started is usually best stored in 64 bit unsigned integers, as they allow for the most persision, and will never run out of space (for ~195 years)
+	-smaller times can be stored in 32 bit unsigned integers if memory is a problem for the engine
+	-although floating point number can work for storing very small times, as time gets larger they quickly get inaccurate
+	-becuase of this issue with floating point numbers, they are best not used as time storage in the engine, since they leave open the possibility of incorrect use and abuse
+	
+Dealing With Breakpoints:
+
+	-when the code hits a breakpoint, execution of the program stops but the CPU continues to run
+	-this allows the clock to continue counting while the engine is paused, leading to a long delta time (potentially hours) when the engine resumes
+	-to avoid this, is is best to set an upper limit in the engine for delta time
+	-if the delta time measured is ever above this limit (lets say 1 second) we just assume the engine got paused and we artificially set the delta time to its expected value (1/FPS)
+
+A Simple Clock Class:
+
+	-most game engines have some class for dealing with all these time issues internally
+	-multiple clock intstances could be created to allow keeping track of different types of time
+	-a basic implementation of this class could look somehting like this:
+
+	class Clock
+	{
+
+		U64	m_timeCycles;
+		F32	m_timeScale;
+		bool	m_isPaused;
+
+		static F32 s_cyclesPerSecond;
+
+		static inline U64 secondsToCycles(F32 timeSeconds)
+		{
+			return (U64)(timeSeconds * s_cyclesPerSecond);
+		}
+
+		//WARNING: Dangerous -- only use to convert small
+		//durations to seconds
+		static inline F32 cyclesToSeconds(U64 timeCycles)
+		{
+			return (F32)timeCycles / s_cyclesPerSecond;
+		}
+
+	public:
+
+		//Call this when the game first start up
+		static void init()
+		{
+			s_cyclesPerSecond = (F32)readHiResTimerFrequency();
+		}
+
+		//Construct a clock. (Notice the use of 'explicit' to
+		//prevent autonmatic conversion from F23 to Clock).
+		explicit Clock(F32 startTimeSeconds = 0.0f) :
+			m_timeCycles(secondsToCycles(startTimeSeconds)),
+			m_timeScale(1.0f), //default to unscaled
+			m_isPaused(false) //default to running
+		{
+		}
+
+		//Return the current time in cycles. NOTE that we do
+		//not return absolute time measurements in floating-
+		//point seconds, because a 32-bit float doesn't have
+		//enough persision. See calcDeltaSeconds().
+		U64 getTimeCycles() const
+		{
+			return m_timeCycles;
+		}
+
+		//Determine the different between this clock's
+		//absolute time and that of another clock, in
+		//seconds. We onyl return the time deltas as floating-
+		//point seconds, due to the percision limitations of
+		//a 32-bit float.
+		F32 calcDeltaSeconds(const Clock& other)
+		{
+			U64 dt = m_timeCycles - other.m_timeCycles;
+			return cyclesToSeconds(dt);
+		}
+
+		//Tihs function should be called once per frame,
+		//with the real measures frame time delta in seconds.
+		void update(F32 dtRealSeconds)
+		{
+			if (!m_isPaused)
+			}
+				U64 dtScaledCycles = secondsToCycles(dtRealSeconds * m_timeScale);
+				m_timeCycles += dtScaledCycles;
+			}
+		}
+
+		void setPaused(boo wantPaused)
+		{
+			m_isPaused = wantPaused;
+		}
+
+		bool isPaused() const
+		{
+			return m_isPaused;
+		}
+
+		F32 getTimeScale() const
+		{
+			return m_timeScale;
+		}
+
+		void singleStep()
+		{
+			if (m_isPaused)
+			{
+				//add one ideal frame interval; don't forget
+				//to scale it by our current time scale!
+				U64 dtScaledCycles = secondsToCycles((1.0f/30.0f) * m_timeScale);
+				m_timeCycles += dtScaledCycles;
+			}
+		}
+	};
