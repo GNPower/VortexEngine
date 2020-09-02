@@ -1,0 +1,21 @@
+-game engine don't use raw inputs directly.
+-they are usually massaged in some way to ensure they are suitable for use in the engine and will produce intuituve in-game behaviours
+-engine also usally intorduce a layer of abstraction between the HID and the gaem itself
+-one example is a button mapping function may be used to map HID inputs to ingame actions, allowig the player to reassign these as desired
+
+Typical Requirements:
+
+	-dead zones (for analog inputs)
+	-analog signal filtering
+	-event detection (button up, button down)
+	-detection of button sequences and multibutton combinations (known as chords)
+	-gesture detection
+	-management of multiple HIDs for multiple players
+	-multiplatform HID support
+	-controller input remapping
+	-context-sensitive inputs
+	-the ability to temporarily disable certain inputs
+
+Dead Zone:
+
+	-

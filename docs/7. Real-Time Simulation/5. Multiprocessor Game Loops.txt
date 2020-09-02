@@ -1,0 +1,32 @@
+SIMD:
+
+	-CPU's provide a number of different SIMD variants
+	-the most commonly used by game engine developers are instructions that operate on foour 32-bit floating point numbers
+	-these allow matrix and 3D vector maths to be performed four times quicker
+
+Fork and Join:
+
+	-another approach to parallel programming is to have the main branch fork into many different threads to perform its tasks, and then join together at the end
+	-this can be done if there are many calculations, all independant of each other, that must be processed
+	-if any part of the process is dependant on the results of two or more of the threads, that part must be completed after the threads have been joined together
+	-sample code for the fork and join method can be found here ( http://msdn.microsoft.com/en-us/library/ms682516(VS.85).aspx )
+
+One Thread Per Subsystem:
+
+	-another parallel programming approach is to assign one thread per subsystem
+	-a master thread would control and synchronize the operations of these threads, while still handling the main workload of the games high level logic (i.e the main game loop)
+	-this approach is well suited to any engine subsystem that performs a relativeley isolated task repeatedly (rendering engine, physics engine, animation, audio engine)
+	-to make use of this a threading API shuold be wrapped into an engine specific API
+	-the API to use depends on the OS. Windows provides the 'Win32' API, whereas UNIX the 'pthreads' library could be used. PS3 has the 'SPURS' library
+	
+Jobs:
+
+	-a problem with the one thread per subsystem approach is that is a single thread is slow, all other threads can be held up waiting
+	-a solution is to divide work into multiple small, relatiely independant 'jobs'
+	-a job is best thought of as a pairing between a chunk of data and some code that operates on that data	
+	-when a job is ready to be run, it is placed on a queue to be picked up by the next available processing unit
+
+Asynchronous Design:
+
+	-when programming an asynchonous game loop, one needs to understand the fact that the results of a processing request may not be completed directly after the request is made
+	-this means it is best is the engine goes off and does other unrelated work while waiting for the results to decrease the time any CPU cores are idle

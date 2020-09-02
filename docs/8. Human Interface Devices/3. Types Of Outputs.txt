@@ -1,0 +1,14 @@
+Rumble:
+
+	-game pads sometimes have a rumble feature which allows the controller to vibrate in the players hands
+
+Force-Feedback:
+
+	-a technique where an actuator on the HID is used to slightly resist the players motion
+	-this is common in arcade driving games
+
+Audio:
+
+	-audio is usually a stand-alone engine system
+	-some HID's contain audio outputs that can be used by the audio system (like the headphone jack on the Xbox controller)
+	-a common use of these types of outputs is voice communication for multiplayer games

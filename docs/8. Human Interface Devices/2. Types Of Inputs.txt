@@ -1,0 +1,14 @@
+Digital Buttons:
+
+	-almost every HID has at least a few digital buttons
+	-a digital button are buttons that can only be in two states, pressed or not pressed
+	-these states are often reffered to as down (pressed) or up (not pressed)
+	-in software the state of a digital button is uaually represented by a single bit
+	- '0' usually represents up (not pressed) and '1' to represent down (pressed)
+	-it is common for the states of all buttons to be packed into a single unsigned integer
+
+Analog Axes And Buttons:
+
+	-an analog input is one that can take on a range of values (not just 0 or 1)
+	-these are usually used to represent the degress to which a trigger is pressed or the location of a joystick
+	-most inputs are digitized by the time they reach the engine, meaning they will lie on a range of numbers, say -32,768 to 32,768 for floats
