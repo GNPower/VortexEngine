@@ -92,3 +92,20 @@ Input Remapping:
 	-though we must be careful to only permit control mappings that make sense
 	-one approach is to group our contorls into classes (i.e. a class for button, a class for axes, etc.) and only permit mapping changes of the saem class
 	
+Context Sensitive Controls:
+
+	-in many games a single button can have many different functions, depending on the context
+	-one example is the common 'use' button, which may cause a player to open a door or pick up an item
+	-another example is a modal control scheme, when walking the controls may be used to control the player, but when driving they control the car
+	-context sensitive controls are faily easy to implement using a state machine
+	-the 'use' button however is slightly harder, possibilities like the player facing both a door and an item create the need for a control heighary
+	-another related issue is control ownership, some engines allow controls to be owned by different parts of the game
+	-so some inputs may be owned by the player, while others are owned by the menu system and so on
+	-some engines introduce the concept of a logical device, which is treated as a seperate device in engine but composed of a subset of of the inputs of a physical device
+	-one logical device might be used for player control, while another is used for the camera system, and so on
+
+Disabling Inputs:
+
+	-in most games it it sometimes necessary to disallow the player from controlling their character, like when in a cinematic
+	-a good way to do this is to put the disable for specific actions into the actions code itself (for example into the player camera code)
+	-this way the action code can simply choose to ignore the input, thoug hall other subsystems can still read the same input for their purposes
