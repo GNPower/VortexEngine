@@ -18,4 +18,77 @@ Typical Requirements:
 
 Dead Zone:
 
-	-
+	-any analog input produces a range of values between some minimum and maximum value
+	-when the control is not being touched you would expect an 'undisturbed' value Io (I-not), usually zero, however due to the nature of analog controls this is often not the case
+	-the most common solution to this problem is to introduce a dead zone aroud Io. [Io - s, Io + s] for a joystick, or [Io, Io + s] for a trigger
+	-the dead zone must be large enough to not account for the noisy input of undisturbed control, but small enough to not interfere with the players sense of HID responsiveness
+
+Analog Signal Filtering:
+
+	-signal noise is a problem even when controls are not within their deadzones, so many games filter the raw inputs from the HID
+	-since a noise signal is usually a much higher frequency relative to the human player one solutionis to use a low-pass filter
+	-another option is to use an N-element moving average
+
+Detecting Input Events:
+
+	-The low level HID interface typically provides the engine with the current state of device inputs
+	-however games re usually more concerned with changes in these states, called events, rather than the states themselves
+	
+	-for button events (pressed and released) the easiest way is to keep track of the last frames state, and compare it with this frames state
+	-if they differ, we know an event occured and the current state of the input tells us which event it was
+
+Chords:
+
+	-a chord is a group of buttons that, when pressed at the same time, produce a unique behaviour in the game
+	-detecting chords is quite simple, we just check the states of multiple buttons to see if they are ever pressed at the same time
+	-though there are still a couple subtleties to account for
+	-if any button in the chord produces a different game action, we must assure only the action of the chord is performed
+	-this is usually done by checking that other buttons in the chord are not pressed when checking for individual button presses
+	-another issue is humans arent perfect, they will often press one or more buttons in the chord earlier than the rest
+	-to account for this chord detection usually allows for the buttons to be pressed on a range of frames [i, i + n] for example, where n is some small number, like 1.
+	-there are two ways of handling chord detection in practice
+		-you can design the game such that a chord always does the original action plus some additional action
+		-this way you dont need to worry about setting off the original action on frame i, and the chord action on frame i + 1 when the rest of the buttons are pressed
+
+		-you can detect the introduce a delay between when an idividual button down event is seen and when it actually counts
+		-if a chord is detected within that delay, it takes precedence over the individual buttons
+		
+		-you can detect the chord when the buttons are pressed, but wait to trigger all events until the buttons are released
+		
+		-you can begin the single-button move immediately, but allow it to be preempted (cancled and replaced) by the chord move
+
+Sequences And Gesture Detection:
+
+	-introducing a delay between when a button is seen as down and when it actually counts is a special case of gesture detection
+	-a gesture is a sequence of action performed via an HID over a period of time
+	-this sequence can include any combination of both button and non-button inputs (ex. A-B-A-Left-Right-Left)
+	-a sequence is usually only considered valid if it is performed in some maximum time frame
+	-this is generally implemented by keeping a brief history of the buttons pressed within a history buffer along with a time stamp
+	-each time an input is detected if it is part of a sequence, in the right order, and within the time window, it is added to the history buffer
+	-if the entire sequence is completed (i.e. the history buffer is filled) the event is registered
+	-if any incorrect input is entered, or an input is outside the alloted time window, the history buffer is reset
+
+Managing Multiple HIDs For Multiple Players:
+
+	-most gaming machines allow two or more HID's to be attached for multiplayer games
+	-the engine must keep track of which devices are currently attached and route each one's input to the appropriate player in the game
+	-this implies there needs to be some way of mapping controlers to players
+	-the engine must also be robust to exceptional conditions such as the controller being unplugged during gameplay or running out of batteries
+	-when connection to a controller is lost most games suspend either the game entirely, or the specific players character until reconnected
+	
+Cross Platform HID Support:
+
+	-many game engines are cross platform
+	-usually game engines provide a hardware abstraction layer, insulating the code from platform specific details
+
+Input Remapping:
+
+	-many games allow the player some degree of choice with regard to the functionality of the various controls in the game
+	-some control preferences about the direction to pull the control stick/mouse to move the camera up, some prefer up to be up, other prefer inverted
+	-some games let the user choose between either a set of predefined button mappings, or give the user general autonomy with only mior button mapping restiracions
+	-some PC games give the user complete control over over the functions of individual buttons, plus a choise of various control schemes for the mouse axes
+	-one way to implement this is to provide a control mapping, where abstract game functions are mapped to specific contorls on the HID
+	-to change the mapping we either swap out the entire table (for predefined control schemes) or allow the user to edit specific entries
+	-though we must be careful to only permit control mappings that make sense
+	-one approach is to group our contorls into classes (i.e. a class for button, a class for axes, etc.) and only permit mapping changes of the saem class
+	
