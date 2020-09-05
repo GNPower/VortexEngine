@@ -1,0 +1,47 @@
+Formatted Output With OutpotDebugString():
+
+	-the windows SDK function OutputDebugString() does not support formatted output, it can only print raw strings in the form of arrays
+	-for this reason most game engines wrap it in a custom function
+
+Verbosity:
+
+	-once a whole bunch of print statements have been added to the code, its nice to be able to leave them there for later
+	-for this reason engine like to add the abilty to control the level of verbosity, either via the command line, settings, or at runtime
+	-when verbosity level is at a minimum only critical errors are printed, as the verbosity goes up more of the print statements contribute to the output
+	-levels of verbosity can also be named for easier understanding, a common choice is (error, warning, info, debug, trace)
+	
+Channels:
+
+	-its also useful to catagorize your debug output into channels
+	-one channel may be output from the animation system, another the physics, and so on
+	-some platforms provide multiple output windows, so channels can be easily implemented
+	-others, like windows, contain only one output window
+	-for these platforms it can be useful catagorize channels in some other means, perhaps by a label (ex [Animation]), or a colour
+	-filters can also be implemented, limiting the output to t=only that of the desired channels
+	-these channels are usually best assigned symbolic values via the enum declaration
+	
+Mirroring Output To A File:
+
+	-it is a good idea to mirror all log ouput to one or more log files (i.e. one per channel)
+	-ideally the log files should contain all of the debug output, regardless of verbosity, allowing errors to be debugged after the fact
+	-you should always flush your log files after every call to ensure that if the game crashes you won't be missing the latest log entries
+	-flushing cn be expensive though, so it is always usefull to provide an engine configuration to turn it on or off
+
+Crach Reports:
+
+	-some engines produce special text/log files when the game craches
+	-in most engine a top level exception handler can be installed that will catch most crashes
+	-this function would print aout all usefull information and maybe even email the log file to the programming team
+	-the kinds of information to include in sucha file are:
+		-current level(s) being player
+		-world-space location of the player at the time of the crash
+		-animation/action state of the player
+		-gameplay scripts that were running
+		-stack trace
+		-state of all memory allocators in the engine (amout of memory free, fragmentation, etc.)
+		-any other relevant info that mey be useful for determining the cause of the crash
+		-screenshot of the last frame before the crash
+
+Debug Drawing Facilities:
+
+	-
